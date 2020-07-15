@@ -1,24 +1,30 @@
 # README
+Tiempo de prueba
+Primero, iniciemos el servidor en localhost:3000:
+rails server
+# Alternativamente, también puedes ejecutar
+# rails s
+Segundo, creemos dos usuarios usando el comando curl:
+curl -H "Content-type: application/json" -d '{"user":{"name":"Luke Skywalker","email":"luke@starwars.com","password": "12345678","password_confirmation":"12345678"}}' http://localhost:3000/users
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+curl -H "Content-type: application/json" -d '{"user":{"name":"Han Solo","email":"han@starwars.com","password": "12345678","password_confirmation":"12345678"}}' http://localhost:3000/users
 
-* Ruby version
+Tercero, listemos los usuarios:
 
-* System dependencies
+http://localhost:3000/users
 
-* Configuration
+Cuarto, autentiquémosnos:
 
-* Database creation
+curl -H “Content-type: application/json” -d ‘{“auth”: {“email”: “luke@starwars.com”, “password”: “12345678”}}’ http://localhost:3000/user_token
 
-* Database initialization
+Observemos que la respuesta nos va a devolver el JWT:
+{"jwt":"este_es_el_jwt"}
 
-* How to run the test suite
+Quinto, obtengamos la información de nuestro propio usuario (Luke Skywalker):
 
-* Services (job queues, cache servers, search engines, etc.)
+curl -H "Authorization: Bearer el_jwt_recibido_previamente" http://localhost:3000/users/current
 
-* Deployment instructions
+Sexto, obtengamos la información de otro usuario, en este caso Han Solo:
 
-* ...
+curl -H "Authorization: Bearer el_jwt_recibido_previamente" http://localhost:3000/users/2

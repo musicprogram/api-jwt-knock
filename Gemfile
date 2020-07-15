@@ -47,7 +47,10 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'rack-cors'
 
 # Usamos knock para autenticar con el JWT
-gem 'knock'
+gem "knock", github: "nsarno/knock", branch: "master",
+    ref: "9214cd027422df8dc31eb67c60032fbbf8fc100b"
 
 # Usamos Active Model Serializers para definir las respuestas del API en JSON
 gem 'active_model_serializers', '~> 0.10.0'
+
+
