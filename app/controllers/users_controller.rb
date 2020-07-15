@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  # Solicitamos autenticación a la acción "show" (mostrar en inglés)
+  before_action :authenticate_user, only: [:show]
   before_action :set_user, only: [:show, :update, :destroy]
 
   # GET /users
@@ -46,6 +48,6 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:name, :email, :password_digest)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 end
